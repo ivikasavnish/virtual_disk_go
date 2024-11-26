@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "7e9c2b1a-5e4f-4f3c-8b2c-1b2c3d4e5f6g",
+		"name": "Virtual Disk API",
+		"description": "API collection for the Virtual Disk service with image processing capabilities",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "File Operations",
+			"item": [
+				{
+					"name": "Upload File (Raw)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/octet-stream"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Raw file content goes here",
+							"options": {
+								"raw": {
+									"language": "binary"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/files?path=example.jpg",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3001",
+							"path": ["files"],
+							"query": [
+								{
+									"key": "path",
+									"value": "example.jpg",
+									"description": "Path where the file will be stored"
+								}
+							]
+						},
+						"description": "Upload a file using raw binary data. Use this for direct file uploads without encoding."
+					}
+				},
+				{
+					"name": "Upload File (JSON)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": \"base64_encoded_file_content\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/files?path=example.jpg",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3001",
+							"path": ["files"],
+							"query": [
+								{
+									"key": "path",
+									"value": "example.jpg",
+									"description": "Path where the file will be stored"
+								}
+							]
+						},
+						"description": "Upload a file using JSON with base64 encoded content"
+					}
+				},
+				{
+					"name": "Upload File (Form)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/path/to/file",
+									"description": "File to upload"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/files?path=example.jpg",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3001",
+							"path": ["files"],
+							"query": [
+								{
+									"key": "path",
+									"value": "example.jpg",
+									"description": "Path where the file will be stored"
+								}
+							]
+						},
+						"description": "Upload a file using multipart form data"
+					}
+				},
+				{
+					"name": "Download File",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:3001/files?path=example.jpg",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3001",
+							"path": ["files"],
+							"query": [
+								{
+									"key": "path",
+									"value": "example.jpg",
+									"description": "Path of the file to download"
+								}
+							]
+						},
+						"description": "Download a file from the virtual disk"
+					}
+				},
+				{
+					"name": "Delete File",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "http://localhost:3001/files?path=example.jpg",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3001",
+							"path": ["files"],
+							"query": [
+								{
+									"key": "path",
+									"value": "example.jpg",
+									"description": "Path of the file to delete"
+								}
+							]
+						},
+						"description": "Delete a file from the virtual disk"
+					}
+				}
+			]
+		},
+		{
+			"name": "Directory Operations",
+			"item": [
+				{
+					"name": "Create Directory",
+					"request": {
+						"method": "POST",
+						"url": {
+							"raw": "http://localhost:3001/directories?path=example/dir",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3001",
+							"path": ["directories"],
+							"query": [
+								{
+									"key": "path",
+									"value": "example/dir",
+									"description": "Path of the directory to create"
+								}
+							]
+						},
+						"description": "Create a new directory"
+					}
+				},
+				{
+					"name": "List Directory",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:3001/directories?path=example/dir",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3001",
+							"path": ["directories"],
+							"query": [
+								{
+									"key": "path",
+									"value": "example/dir",
+									"description": "Path of the directory to list"
+								}
+							]
+						},
+						"description": "List contents of a directory"
+					}
+				},
+				{
+					"name": "Delete Directory",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "http://localhost:3001/directories?path=example/dir",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3001",
+							"path": ["directories"],
+							"query": [
+								{
+									"key": "path",
+									"value": "example/dir",
+									"description": "Path of the directory to delete"
+								}
+							]
+						},
+						"description": "Delete a directory and its contents"
+					}
+				}
+			]
+		},
+		{
+			"name": "Image Processing",
+			"item": [
+				{
+					"name": "Process Image",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:3001/files?path=example.jpg&width=800&height=600&format=webp",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3001",
+							"path": ["files"],
+							"query": [
+								{
+									"key": "path",
+									"value": "example.jpg",
+									"description": "Path of the image to process"
+								},
+								{
+									"key": "width",
+									"value": "800",
+									"description": "Desired width of the processed image"
+								},
+								{
+									"key": "height",
+									"value": "600",
+									"description": "Desired height of the processed image"
+								},
+								{
+									"key": "format",
+									"value": "webp",
+									"description": "Desired output format (jpg, png, webp)"
+								}
+							]
+						},
+						"description": "Download and process an image with optional resizing and format conversion"
+					}
+				}
+			]
+		}
+	]
+}
